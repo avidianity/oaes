@@ -1,0 +1,7 @@
+{
+  "name": "oaes",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
