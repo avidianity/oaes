@@ -16,6 +16,7 @@ const List: FC<Props> = ({ id }) => {
 	useLogin(routes.ADMINISTRATOR);
 	const history = useHistory();
 	const match = useRouteMatch();
+	const [alert] = useIonAlert();
 	const [confirmDeleteAlert] = useIonAlert();
 	const [successfulDeleteAlert] = useIonAlert();
 

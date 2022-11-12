@@ -1,9 +1,9 @@
 import { Picture } from '../types/misc';
 
-export interface StoreItemModel {
-	id: string;
+export interface OrderItemModel {
 	name: string;
+	picture: Picture;
 	price: number;
 	description: string;
-	picture: Picture;
+	quantity: number;
 }

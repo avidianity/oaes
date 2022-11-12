@@ -17,6 +17,7 @@ const List: FC<Props> = (props) => {
 	const me = useMe<AdministratorModel>(routes.ADMINISTRATOR);
 	const history = useHistory();
 	const match = useRouteMatch();
+	const [alert] = useIonAlert();
 	const [confirmDeleteAlert] = useIonAlert();
 	const [successfulDeleteAlert] = useIonAlert();
 
