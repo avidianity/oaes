@@ -35,9 +35,7 @@ import stateService from './services/State';
 import httpService from './services/Http';
 import { useToggle } from '@avidian/hooks';
 
-setupIonicReact({
-	mode: 'ios',
-});
+setupIonicReact();
 
 const App: React.FC = () => {
 	const [loading, setLoading] = useToggle(true);
@@ -91,8 +89,8 @@ const App: React.FC = () => {
 						<IonRouterOutlet>
 							<Route exact path={routes.HOME} render={(props) => <Home {...props} />} />
 							<Route path={routes.ADMINISTRATOR} render={(props) => <Administrator {...props} />} />
-							<Route path={routes.RIDER} render={(props) => <Rider {...props} />} />
 							<Route path={routes.CUSTOMER} render={(props) => <Customer {...props} />} />
+							<Route path={routes.RIDER} render={(props) => <Rider {...props} />} />
 							<Route exact path='/'>
 								<Redirect to={routes.HOME} />
 							</Route>

@@ -1,17 +1,15 @@
 import { IonContent, IonPage } from '@ionic/react';
 import React, { FC } from 'react';
 import { RouteComponentProps } from 'react-router';
-import { useLogin } from '../../hooks';
 import { routes } from '../../routes';
 import { storefrontOutline, settingsOutline, cardOutline } from 'ionicons/icons';
 import BottomNavigationBar from '../../components/BottomNavigationBar';
 import Settings from '../Settings';
+import Billers from './Billers';
 
 interface Props extends RouteComponentProps {}
 
 const Home: FC<Props> = (props) => {
-	useLogin(routes.CUSTOMER);
-
 	return (
 		<IonPage>
 			<IonContent fullscreen>
@@ -31,7 +29,7 @@ const Home: FC<Props> = (props) => {
 							icon: cardOutline,
 							label: 'Billers',
 							name: 'billers',
-							render: (_: RouteComponentProps) => <div>Billers</div>,
+							render: (_: RouteComponentProps) => <Billers />,
 						},
 						{
 							route: `${routes.CUSTOMER}/home/settings`,
