@@ -94,7 +94,20 @@ const List: FC<Props> = (props) => {
 									color='warning'
 									onClick={(e) => {
 										e.preventDefault();
-										assignToSelf(order);
+										if (order.has_rider) {
+											history.push(`${match.url}/${order.id}/edit`);
+										}
+									}}
+									disabled={!order.has_rider}>
+									<span className='text-white'>Edit</span>
+								</IonButton>
+								<IonButton
+									color='warning'
+									onClick={(e) => {
+										e.preventDefault();
+										if (!order.has_rider) {
+											assignToSelf(order);
+										}
 									}}
 									disabled={order.has_rider}>
 									<span className='text-white'>{order.has_rider ? 'Assigned' : 'Assign'}</span>
