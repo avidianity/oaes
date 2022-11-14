@@ -1,47 +1,32 @@
 import { IonButton, IonContent, IonInput, IonItem, IonLabel, IonList, IonPage, IonRouterLink, useIonAlert } from '@ionic/react';
 import React, { FC, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router';
-import { upperFirst } from 'lodash-es';
-import { routes } from '../routes';
 import httpService from '../services/Http';
 import { useForm } from 'react-hook-form';
 import { useToggle } from '@avidian/hooks';
 import { AxiosError } from 'axios';
 import stateService from '../services/State';
+import { CustomerData } from '../api/customers';
 
 interface Props extends RouteComponentProps {}
 
-const Login: FC<Props> = ({ location, history }) => {
-	const { register, handleSubmit, reset } = useForm();
+type Inputs = Omit<CustomerData, 'id' | 'created_at' | 'updated_at'> & { password: string };
+
+const Register: FC<Props> = ({ location, history }) => {
+	const { register, handleSubmit, reset } = useForm<Inputs>();
 	const [processing, setProcessing] = useToggle(false);
 	const [alert] = useIonAlert();
 
-	const type = (() => {
-		switch (true) {
-			case location.pathname.includes('administrator'):
-				return 'administrator';
-			case location.pathname.includes('rider'):
-				return 'rider';
-			case location.pathname.includes('customer'):
-				return 'customer';
-			default:
-				return '';
-		}
-	})();
-
-	const submit = async (payload: any) => {
+	const submit = async (payload: Inputs) => {
 		setProcessing(true);
 
 		try {
-			const response = await httpService.post(`/v1/${type}/auth/login`, {
-				email: payload.email,
-				password: payload.password,
-			});
+			const response = await httpService.post(`/v1/customer/auth/register`, payload);
 
 			stateService.set('token', response.data.access.token);
 			stateService.set('user', response.data.user);
 
-			history.push(`/${type}/home`);
+			history.push(`/customer/home`);
 
 			reset();
 		} catch (error) {
@@ -55,7 +40,7 @@ const Login: FC<Props> = ({ location, history }) => {
 
 	const check = async () => {
 		if (stateService.get('token')) {
-			history.replace(`/${type}/home`);
+			history.replace(`/customer/home`);
 		}
 	};
 
@@ -71,10 +56,40 @@ const Login: FC<Props> = ({ location, history }) => {
 					<div className='flex'>
 						<img src='/assets/icon/icon.png' alt='OAES' className='h-40 mt-10 mx-auto' />
 					</div>
-					<h1 className='text-xl'>Sign In ({upperFirst(type)})</h1>
+					<h1 className='text-xl'>Sign Up (Customer)</h1>
 					<div className='flex'>
 						<div className='mx-auto px-10 mt-4'>
 							<IonList>
+								<IonItem>
+									<IonLabel>
+										<span className='text-gray-600'>First Name</span>
+									</IonLabel>
+									<IonInput type='text' {...register('first_name')} />
+								</IonItem>
+								<IonItem>
+									<IonLabel>
+										<span className='text-gray-600'>Last Name</span>
+									</IonLabel>
+									<IonInput type='text' {...register('last_name')} />
+								</IonItem>
+								<IonItem>
+									<IonLabel>
+										<span className='text-gray-600'>Birthday</span>
+									</IonLabel>
+									<IonInput type='date' {...register('birthday')} />
+								</IonItem>
+								<IonItem>
+									<IonLabel>
+										<span className='text-gray-600'>Address</span>
+									</IonLabel>
+									<IonInput type='text' {...register('address')} />
+								</IonItem>
+								<IonItem>
+									<IonLabel>
+										<span className='text-gray-600'>Phone</span>
+									</IonLabel>
+									<IonInput type='text' {...register('phone')} />
+								</IonItem>
 								<IonItem>
 									<IonLabel>
 										<span className='text-gray-600'>Email</span>
@@ -91,31 +106,20 @@ const Login: FC<Props> = ({ location, history }) => {
 						</div>
 					</div>
 					<p className='mt-4'>
-						Don't have an account?{' '}
+						Already have an account?{' '}
 						<IonRouterLink
 							href='/customer/register'
 							onClick={(e) => {
 								e.preventDefault();
 								if (!processing) {
-									history.replace('/customer/register');
+									history.replace('/customer/login');
 								}
 							}}>
-							Sign Up
+							Sign In
 						</IonRouterLink>
 					</p>
 					<IonButton type='submit' class='mt-10 w-40' disabled={processing}>
 						Submit
-					</IonButton>
-					<br />
-					<IonButton
-						disabled={processing}
-						color='tertiary'
-						class='mt-2 w-40'
-						onClick={(e) => {
-							e.preventDefault();
-							history.replace(routes.HOME);
-						}}>
-						Change Role
 					</IonButton>
 				</form>
 			</IonContent>
@@ -123,4 +127,4 @@ const Login: FC<Props> = ({ location, history }) => {
 	);
 };
 
-export default Login;
+export default Register;

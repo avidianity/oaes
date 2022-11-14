@@ -9,6 +9,7 @@ export const routes = {
 		},
 		customer: {
 			LOGIN: '/login',
+			REGISTER: '/register',
 		},
 	},
 	HOME: '/home',

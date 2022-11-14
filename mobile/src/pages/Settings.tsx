@@ -61,7 +61,10 @@ const Settings: FC<Props> = ({ type }) => {
 							e.preventDefault();
 							alert('Are you sure you want to logout?', [
 								{
-									text: 'Ok',
+									text: 'Cancel',
+								},
+								{
+									text: 'Confirm',
 									handler: () => {
 										logout();
 									},
