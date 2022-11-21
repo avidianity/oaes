@@ -79,8 +79,8 @@ const List: FC<Props> = (props) => {
 							<IonCardSubtitle>ID: {order.id.toUpperCase()}</IonCardSubtitle>
 							<IonCardSubtitle>Status: {order.status}</IonCardSubtitle>
 							<IonCardSubtitle>Customer: {order.customer ? getCustomerName(order.customer) : 'N/A'}</IonCardSubtitle>
-							Created {dayjs(order.created_at).format('MMMM DD, YYYY')}
-							Updated {dayjs(order.created_at).format('MMMM DD, YYYY')}
+							<p>Created {dayjs(order.created_at).format('MMMM DD, YYYY')}</p>
+							<p>Updated {dayjs(order.created_at).format('MMMM DD, YYYY')}</p>
 							<IonCardContent>
 								<IonButton
 									color='primary'

@@ -6,7 +6,7 @@
 		"@avidian/events": "^1.0.3",
 		"@avidian/extras": "^1.0.1",
 		"@avidian/form-data": "^1.0.2",
-		"@avidian/hooks": "^2.0.0",
+		"@avidian/hooks": "^2.0.1",
 		"@avidian/state": "^1.3.6",
 		"@capacitor/android": "4.4.0",
 		"@capacitor/app": "4.1.0",

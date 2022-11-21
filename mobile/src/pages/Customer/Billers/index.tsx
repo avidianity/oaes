@@ -9,7 +9,7 @@ type Props = {};
 const Billers: FC<Props> = (props) => {
 	const [type, setType] = useState('prompt');
 
-	let component: any = null;
+	let component: JSX.Element | null = null;
 
 	switch (type) {
 		case 'prompt':

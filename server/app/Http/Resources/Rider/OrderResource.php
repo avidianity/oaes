@@ -21,6 +21,7 @@ class OrderResource extends JsonResource
             'id' => $this->getKey(),
             'status' => $this->status,
             'has_rider' => !is_null($this->rider_id),
+            'rider' => RiderResource::make($this->whenLoaded('rider')),
             'customer' => CustomerResource::make($this->whenLoaded('customer')),
             'items' => OrderItemResource::collection($this->whenLoaded('items')),
             'created_at' => $this->created_at,

@@ -35,7 +35,9 @@ import stateService from './services/State';
 import httpService from './services/Http';
 import { useToggle } from '@avidian/hooks';
 
-setupIonicReact();
+setupIonicReact({
+	mode: 'ios',
+});
 
 const App: React.FC = () => {
 	const [loading, setLoading] = useToggle(true);

@@ -1,13 +1,15 @@
 import { IonPage, IonContent, IonRouterOutlet } from '@ionic/react';
 import React, { FC } from 'react';
 import { Redirect, Route, useRouteMatch } from 'react-router';
-import Form from './Form';
+import { useLogin } from '../../../hooks';
+import { routes } from '../../../routes';
 import Items from './Items';
 import List from './List';
 
 type Props = {};
 
-const Orders: FC<Props> = (props) => {
+const Stores: FC<Props> = (props) => {
+	useLogin(routes.CUSTOMER);
 	const match = useRouteMatch();
 
 	return (
@@ -16,7 +18,6 @@ const Orders: FC<Props> = (props) => {
 				<IonRouterOutlet>
 					<Route exact path={match.url} render={() => <List />} />
 					<Route path={`${match.url}/:id/items`} render={() => <Items />} />
-					<Route path={`${match.url}/:id/edit`} render={() => <Form mode='edit' />} />
 					<Route render={() => <Redirect to={match.url} />} />
 				</IonRouterOutlet>
 			</IonContent>
@@ -24,4 +25,4 @@ const Orders: FC<Props> = (props) => {
 	);
 };
 
-export default Orders;
+export default Stores;

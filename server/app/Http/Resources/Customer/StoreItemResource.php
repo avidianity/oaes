@@ -5,9 +5,9 @@ namespace App\Http\Resources\Customer;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @mixin \App\Models\Store
+ * @mixin \App\Models\StoreItem
  */
-class StoreResource extends JsonResource
+class StoreItemResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,11 +20,12 @@ class StoreResource extends JsonResource
         return [
             'id' => $this->getKey(),
             'name' => $this->name,
-            'address' => $this->address,
             'picture' => [
                 'url' => $this->picture_url,
             ],
-            'items' => StoreItemResource::collection($this->whenLoaded('items')),
+            'price' => $this->price,
+            'description' => $this->description,
+            'store' => StoreResource::make($this->whenLoaded('store')),
         ];
     }
 }

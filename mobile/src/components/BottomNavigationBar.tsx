@@ -18,7 +18,7 @@ type Props = {
 };
 
 const BottomNavigationBar: FC<Props> = ({ tabs, homeRoute }) => {
-	const defaultComponent = tabs.find((item) => item.default === true);
+	const defaultComponent = tabs.find((item) => item.route === homeRoute || item.default === true);
 
 	return (
 		<IonTabs>
@@ -28,7 +28,7 @@ const BottomNavigationBar: FC<Props> = ({ tabs, homeRoute }) => {
 						<Route exact={exact} path={route} render={render} key={index} />
 					))}
 					{defaultComponent ? (
-						<Route exact path={homeRoute}>
+						<Route>
 							<Redirect to={defaultComponent.route} />
 						</Route>
 					) : null}

@@ -16,6 +16,21 @@ export async function listStoreItems(storeId: string, type: string) {
 	return data.data;
 }
 
+export async function getItems(type: string, ids: string[]) {
+	const token = stateService.get('token');
+
+	const { data } = await httpService.get<{ data: StoreItemModel[] }>(`/v1${type}/items/all`, {
+		params: {
+			items: ids,
+		},
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	return data.data;
+}
+
 export async function getStoreItem(storeId: string, type: string, id: string) {
 	const token = stateService.get('token');
 

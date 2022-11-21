@@ -1,7 +1,6 @@
 import { IonPage, IonContent, IonRouterOutlet } from '@ionic/react';
 import React, { FC } from 'react';
 import { Redirect, Route, useRouteMatch } from 'react-router';
-import Form from './Form';
 import Items from './Items';
 import List from './List';
 
@@ -16,7 +15,6 @@ const Orders: FC<Props> = (props) => {
 				<IonRouterOutlet>
 					<Route exact path={match.url} render={() => <List />} />
 					<Route path={`${match.url}/:id/items`} render={() => <Items />} />
-					<Route path={`${match.url}/:id/edit`} render={() => <Form mode='edit' />} />
 					<Route render={() => <Redirect to={match.url} />} />
 				</IonRouterOutlet>
 			</IonContent>

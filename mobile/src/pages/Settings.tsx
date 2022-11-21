@@ -31,13 +31,12 @@ const Settings: FC<Props> = ({ type }) => {
 						Authorization: `Bearer ${token}`,
 					},
 				});
-
-				stateService.remove('token');
 			}
-
-			history.push(`${type}/login`);
 		} catch (_) {
 		} finally {
+			stateService.clear();
+
+			history.replace(`${type}/login`);
 			setProcessing(false);
 		}
 	};

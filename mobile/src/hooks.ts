@@ -1,5 +1,5 @@
-import { useNullable } from '@avidian/hooks';
-import { useEffect, useState } from 'react';
+import { useNullable, UseStorageReturn } from '@avidian/hooks';
+import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import httpService from './services/Http';
 import stateService from './services/State';
@@ -77,4 +77,24 @@ export function useValidationErrors<T extends string>() {
 	};
 
 	return { errors, setErrors, hasError, setError, clearErrors };
+}
+
+export function useStorage<T>(key: string, defaultValue: T, storageObject: Storage): UseStorageReturn<T> {
+	const [value, setValue] = useState(() => {
+		const jsonValue = storageObject.getItem(key);
+		if (jsonValue) return JSON.parse(jsonValue);
+
+		return defaultValue;
+	});
+
+	useEffect(() => {
+		if (value === undefined) return storageObject.removeItem(key);
+		storageObject.setItem(key, JSON.stringify(value));
+	}, [key, value, storageObject]);
+
+	const remove = useCallback(() => {
+		setValue(undefined);
+	}, []);
+
+	return { value, setValue, remove };
 }

@@ -18,7 +18,7 @@ class OrderController extends Controller
         $orders = Order::query()
             ->where('rider_id', $rider->getKey())
             ->orWhereNull('rider_id')
-            ->with(['customer', 'items'])
+            ->with(['customer', 'items', 'rider'])
             ->get();
 
         return OrderResource::collection($orders);
@@ -31,6 +31,7 @@ class OrderController extends Controller
         $order = Order::query()
             ->where('rider_id', $rider->getKey())
             ->orWhereNull('rider_id')
+            ->with(['customer', 'items', 'rider'])
             ->findOrFail($id);
 
         return OrderResource::make($order);

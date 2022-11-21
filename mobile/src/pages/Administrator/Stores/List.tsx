@@ -11,14 +11,14 @@ import { useToggle } from '@avidian/hooks';
 type Props = {};
 
 const List: FC<Props> = (props) => {
-	useLogin(routes.ADMINISTRATOR);
+	useLogin(routes.CUSTOMER);
 	const history = useHistory();
 	const match = useRouteMatch();
 	const [alert] = useIonAlert();
 	const [confirmDeleteAlert] = useIonAlert();
 	const [successfulDeleteAlert] = useIonAlert();
 
-	const { data: stores, refetch, isFetching } = useQuery(['stores'], () => listStores(routes.ADMINISTRATOR));
+	const { data: stores, refetch, isFetching } = useQuery(['stores'], () => listStores(routes.CUSTOMER));
 	const [processing, setProcessing] = useToggle(false);
 
 	const deleteItem = async (id: string) => {
@@ -93,7 +93,7 @@ const List: FC<Props> = (props) => {
 										e.preventDefault();
 										history.push(`${match.url}/${store.id}/items`);
 									}}>
-									<span className='text-white'>Items</span>
+									<span className='text-white'>View</span>
 								</IonButton>
 								<IonButton
 									color='warning'

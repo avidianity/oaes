@@ -2,10 +2,13 @@ import { IonContent, IonPage } from '@ionic/react';
 import React, { FC } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { routes } from '../../routes';
-import { storefrontOutline, settingsOutline, cardOutline } from 'ionicons/icons';
+import { storefrontOutline, settingsOutline, cardOutline, cartOutline, pricetagsOutline } from 'ionicons/icons';
 import BottomNavigationBar from '../../components/BottomNavigationBar';
 import Settings from '../Settings';
 import Billers from './Billers';
+import Stores from './Stores';
+import Cart from './Cart';
+import Orders from './Orders';
 
 interface Props extends RouteComponentProps {}
 
@@ -17,11 +20,27 @@ const Home: FC<Props> = (props) => {
 					tabs={[
 						{
 							route: `${routes.CUSTOMER}/home/stores`,
-							default: false,
+							default: true,
 							icon: storefrontOutline,
 							label: 'Stores',
 							name: 'stores',
-							render: (_: RouteComponentProps) => <div>Stores</div>,
+							render: (_: RouteComponentProps) => <Stores />,
+						},
+						{
+							route: `${routes.CUSTOMER}/home/cart`,
+							default: false,
+							icon: cartOutline,
+							label: 'Cart',
+							name: 'cart',
+							render: (_: RouteComponentProps) => <Cart />,
+						},
+						{
+							route: `${routes.CUSTOMER}/home/orders`,
+							default: false,
+							icon: pricetagsOutline,
+							label: 'Orders',
+							name: 'orders',
+							render: (_: RouteComponentProps) => <Orders />,
 						},
 						{
 							route: `${routes.CUSTOMER}/home/billers`,
@@ -33,14 +52,14 @@ const Home: FC<Props> = (props) => {
 						},
 						{
 							route: `${routes.CUSTOMER}/home/settings`,
-							default: true,
+							default: false,
 							icon: settingsOutline,
 							label: 'Settings',
 							name: 'settings',
 							render: (_: RouteComponentProps) => <Settings type={routes.CUSTOMER} />,
 						},
 					]}
-					homeRoute={`${routes.CUSTOMER}/home`}
+					homeRoute={`${routes.CUSTOMER}/home/stores`}
 				/>
 			</IonContent>
 		</IonPage>

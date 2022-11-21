@@ -29,7 +29,7 @@ const Home: FC<Props> = (props) => {
 						},
 						{
 							route: `${routes.RIDER}/home/orders`,
-							default: true,
+							default: false,
 							icon: pricetagOutline,
 							label: 'Orders',
 							name: 'orders',
@@ -37,7 +37,7 @@ const Home: FC<Props> = (props) => {
 						},
 						{
 							route: `${routes.RIDER}/home/settings`,
-							default: true,
+							default: false,
 							icon: settingsOutline,
 							label: 'Settings',
 							name: 'settings',
