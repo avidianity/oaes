@@ -5,37 +5,32 @@ import httpService from './services/Http';
 import stateService from './services/State';
 
 export function useLogin(path: string) {
-	const history = useHistory();
-
-	const check = async () => {
-		const token = stateService.get('token');
-
-		if (!token) {
-			return history.push(`${path}/login`);
-		}
-
-		try {
-			if (stateService.get('auth.checking') === true) {
-				return;
-			}
-
-			stateService.set('auth.checking', true);
-			await httpService.get(`/v1${path}/auth/check`, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
-		} catch (error) {
-			return history.push(`${path}/login`);
-		} finally {
-			stateService.set('auth.checking', false);
-		}
-	};
-
-	useEffect(() => {
-		check();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	// const history = useHistory();
+	// const check = async () => {
+	// 	const token = stateService.get('token');
+	// 	if (!token) {
+	// 		return history.push(`${path}/login`);
+	// 	}
+	// 	try {
+	// 		if (stateService.get('auth.checking') === true) {
+	// 			return;
+	// 		}
+	// 		stateService.set('auth.checking', true);
+	// 		await httpService.get(`/v1${path}/auth/check`, {
+	// 			headers: {
+	// 				Authorization: `Bearer ${token}`,
+	// 			},
+	// 		});
+	// 	} catch (error) {
+	// 		return history.push(`${path}/login`);
+	// 	} finally {
+	// 		stateService.set('auth.checking', false);
+	// 	}
+	// };
+	// useEffect(() => {
+	// 	check();
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, []);
 }
 
 export function useMe<T>(type: string) {

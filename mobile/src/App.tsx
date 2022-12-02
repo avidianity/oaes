@@ -93,7 +93,7 @@ const App: React.FC = () => {
 							<Route path={routes.ADMINISTRATOR} render={(props) => <Administrator {...props} />} />
 							<Route path={routes.CUSTOMER} render={(props) => <Customer {...props} />} />
 							<Route path={routes.RIDER} render={(props) => <Rider {...props} />} />
-							<Route exact path='/'>
+							<Route>
 								<Redirect to={routes.HOME} />
 							</Route>
 						</IonRouterOutlet>

@@ -36,7 +36,7 @@ const Settings: FC<Props> = ({ type }) => {
 		} finally {
 			stateService.clear();
 
-			history.replace(`${type}/login`);
+			window.location.href = `${type}/login`;
 			setProcessing(false);
 		}
 	};

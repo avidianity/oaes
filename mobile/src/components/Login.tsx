@@ -54,8 +54,18 @@ const Login: FC<Props> = ({ location, history }) => {
 	};
 
 	const check = async () => {
-		if (stateService.get('token')) {
-			history.replace(`/${type}/home`);
+		if (stateService.has('token')) {
+			const token = stateService.get('token');
+			try {
+				await httpService.get(`/v1/${type}/auth/check`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
+				history.replace(`/${type}/home`);
+			} catch (error) {
+				stateService.clear();
+			}
 		}
 	};
 

@@ -17,55 +17,51 @@ const Home: FC<Props> = (props) => {
 	useLogin(routes.ADMINISTRATOR);
 
 	return (
-		<IonPage>
-			<IonContent fullscreen>
-				<BottomNavigationBar
-					tabs={[
-						{
-							route: `${routes.ADMINISTRATOR}/home/administrators`,
-							default: true,
-							icon: personCircleOutline,
-							label: 'Administrators',
-							name: 'administrators',
-							render: (_: RouteComponentProps) => <Administrators />,
-						},
-						{
-							route: `${routes.ADMINISTRATOR}/home/riders`,
-							default: false,
-							icon: bicycleOutline,
-							label: 'Riders',
-							name: 'riders',
-							render: (_: RouteComponentProps) => <Riders />,
-						},
-						{
-							route: `${routes.ADMINISTRATOR}/home/customers`,
-							default: false,
-							icon: bodyOutline,
-							label: 'Customers',
-							name: 'customers',
-							render: (_: RouteComponentProps) => <Customers />,
-						},
-						{
-							route: `${routes.ADMINISTRATOR}/home/stores`,
-							default: false,
-							icon: storefrontOutline,
-							label: 'Stores',
-							name: 'stores',
-							render: (_: RouteComponentProps) => <Stores />,
-						},
-						{
-							route: `${routes.ADMINISTRATOR}/home/settings`,
-							default: false,
-							icon: settingsOutline,
-							label: 'Settings',
-							name: 'settings',
-							render: (_: RouteComponentProps) => <Settings type={routes.ADMINISTRATOR} />,
-						},
-					]}
-					homeRoute={`${routes.ADMINISTRATOR}/home`}
-				/>
-			</IonContent>
-		</IonPage>
+		<BottomNavigationBar
+			tabs={[
+				{
+					route: `${routes.ADMINISTRATOR}/home/administrators`,
+					default: true,
+					icon: personCircleOutline,
+					label: 'Administrators',
+					name: 'administrators',
+					render: (_: RouteComponentProps) => <Administrators />,
+				},
+				{
+					route: `${routes.ADMINISTRATOR}/home/riders`,
+					default: false,
+					icon: bicycleOutline,
+					label: 'Riders',
+					name: 'riders',
+					render: (_: RouteComponentProps) => <Riders />,
+				},
+				{
+					route: `${routes.ADMINISTRATOR}/home/customers`,
+					default: false,
+					icon: bodyOutline,
+					label: 'Customers',
+					name: 'customers',
+					render: (_: RouteComponentProps) => <Customers />,
+				},
+				{
+					route: `${routes.ADMINISTRATOR}/home/stores`,
+					default: false,
+					icon: storefrontOutline,
+					label: 'Stores',
+					name: 'stores',
+					render: (_: RouteComponentProps) => <Stores />,
+				},
+				{
+					route: `${routes.ADMINISTRATOR}/home/settings`,
+					default: false,
+					icon: settingsOutline,
+					label: 'Settings',
+					name: 'settings',
+					render: (_: RouteComponentProps) => <Settings type={routes.ADMINISTRATOR} />,
+				},
+			]}
+			homeRoute={`${routes.ADMINISTRATOR}/home`}
+		/>
 	);
 };
 
