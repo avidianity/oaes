@@ -16,28 +16,28 @@ class CustomerController extends Controller
         return CustomerResource::collection(Customer::all());
     }
 
-    public function show(Customer $rider)
+    public function show(Customer $customer)
     {
-        return CustomerResource::make($rider);
+        return CustomerResource::make($customer);
     }
 
     public function store(StoreRequest $request)
     {
-        $rider = Customer::create($request->validated());
+        $customer = Customer::create($request->validated());
 
-        return CustomerResource::make($rider);
+        return CustomerResource::make($customer);
     }
 
-    public function update(UpdateRequest $request, Customer $rider)
+    public function update(UpdateRequest $request, Customer $customer)
     {
-        $rider->update($request->validated());
+        $customer->update($request->validated());
 
-        return CustomerResource::make($rider);
+        return CustomerResource::make($customer);
     }
 
-    public function destroy(Customer $rider)
+    public function destroy(Customer $customer)
     {
-        $rider->delete();
+        $customer->delete();
 
         return response('', Response::HTTP_NO_CONTENT);
     }
