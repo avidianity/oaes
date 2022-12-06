@@ -1,4 +1,3 @@
-import { IonContent, IonPage } from '@ionic/react';
 import React, { FC } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { useLogin } from '../../hooks';
