@@ -12,7 +12,7 @@ import { createFile } from '../api/files';
 
 interface Props extends RouteComponentProps {}
 
-type Inputs = Omit<CustomerData, 'id' | 'created_at' | 'updated_at'> & { password: string };
+type Inputs = Omit<CustomerData, 'id' | 'created_at' | 'updated_at'> & { password: string; password_confirmation: string };
 
 const Register: FC<Props> = ({ location, history }) => {
 	const { register, handleSubmit, reset } = useForm<Inputs>();
@@ -70,7 +70,7 @@ const Register: FC<Props> = ({ location, history }) => {
 	return (
 		<IonPage>
 			<IonContent fullscreen>
-				<form className='text-center' onSubmit={handleSubmit(submit)}>
+				<form className='text-center pb-10' onSubmit={handleSubmit(submit)}>
 					<div className='flex'>
 						<img src='/assets/icon/icon.png' alt='OAES' className='h-40 mt-10 mx-auto' />
 					</div>
@@ -119,6 +119,12 @@ const Register: FC<Props> = ({ location, history }) => {
 										<span className='text-gray-600'>Password</span>
 									</IonLabel>
 									<IonInput type='password' {...register('password')} />
+								</IonItem>
+								<IonItem>
+									<IonLabel>
+										<span className='text-gray-600'>Confirm Password</span>
+									</IonLabel>
+									<IonInput type='password' {...register('password_confirmation')} />
 								</IonItem>
 								<IonItem>
 									<input ref={fileRef} type='file' className='hidden' onChange={processFile} />

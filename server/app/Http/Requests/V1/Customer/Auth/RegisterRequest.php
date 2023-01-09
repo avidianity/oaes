@@ -32,7 +32,7 @@ class RegisterRequest extends FormRequest
             'address' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', Rule::phone()->country(['PH'])->mobile()],
             'email' => ['required', 'email', 'max:255', Rule::unique(Customer::class)],
-            'password' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'max:255', 'confirmed'],
             'valid_id_url' => ['required', 'url'],
         ];
     }
