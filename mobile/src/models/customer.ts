@@ -7,4 +7,5 @@ export interface CustomerModel {
 	phone: string;
 	email: string;
 	created_at: string;
+	valid_id_url?: string;
 }

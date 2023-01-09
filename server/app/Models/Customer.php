@@ -22,6 +22,7 @@ class Customer extends Authenticatable implements JWTSubject
         'phone',
         'email',
         'password',
+        'valid_id_url',
     ];
 
     protected $casts = [

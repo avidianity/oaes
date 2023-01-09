@@ -1,5 +1,5 @@
 import { IonButton, IonContent, IonInput, IonItem, IonLabel, IonList, IonPage, IonRouterLink, useIonAlert } from '@ionic/react';
-import React, { FC, useEffect } from 'react';
+import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 import { RouteComponentProps } from 'react-router';
 import httpService from '../services/Http';
 import { useForm } from 'react-hook-form';
@@ -7,6 +7,8 @@ import { useToggle } from '@avidian/hooks';
 import { AxiosError } from 'axios';
 import stateService from '../services/State';
 import { CustomerData } from '../api/customers';
+import { routes } from '../routes';
+import { createFile } from '../api/files';
 
 interface Props extends RouteComponentProps {}
 
@@ -16,11 +18,15 @@ const Register: FC<Props> = ({ location, history }) => {
 	const { register, handleSubmit, reset } = useForm<Inputs>();
 	const [processing, setProcessing] = useToggle(false);
 	const [alert] = useIonAlert();
+	const fileRef = useRef<HTMLInputElement>(null);
+	const [preview, setPreview] = useState('');
 
 	const submit = async (payload: Inputs) => {
 		setProcessing(true);
 
 		try {
+			payload.valid_id_url = preview;
+
 			const response = await httpService.post(`/v1/customer/auth/register`, payload);
 
 			stateService.set('token', response.data.access.token);
@@ -42,6 +48,18 @@ const Register: FC<Props> = ({ location, history }) => {
 		if (stateService.get('token')) {
 			history.replace(`/customer/home`);
 		}
+	};
+
+	const processFile = async (event: ChangeEvent<HTMLInputElement>) => {
+		if (!event.target.files || event.target.files.length === 0) {
+			return;
+		}
+
+		const file = event.target.files.item(0)!;
+
+		const { url } = await createFile(routes.CUSTOMER, file);
+
+		setPreview(url);
 	};
 
 	useEffect(() => {
@@ -101,6 +119,16 @@ const Register: FC<Props> = ({ location, history }) => {
 										<span className='text-gray-600'>Password</span>
 									</IonLabel>
 									<IonInput type='password' {...register('password')} />
+								</IonItem>
+								<IonItem>
+									<input ref={fileRef} type='file' className='hidden' onChange={processFile} />
+									<IonButton
+										onClick={(e) => {
+											e.preventDefault();
+											fileRef.current?.click();
+										}}>
+										Upload Valid ID
+									</IonButton>
 								</IonItem>
 							</IonList>
 						</div>

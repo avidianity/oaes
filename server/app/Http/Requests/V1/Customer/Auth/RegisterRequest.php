@@ -33,6 +33,7 @@ class RegisterRequest extends FormRequest
             'phone' => ['required', 'string', Rule::phone()->country(['PH'])->mobile()],
             'email' => ['required', 'email', 'max:255', Rule::unique(Customer::class)],
             'password' => ['required', 'string', 'max:255'],
+            'valid_id_url' => ['required', 'url'],
         ];
     }
 }
